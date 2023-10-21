@@ -60,6 +60,7 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
+    // max-height: ;
   }
   &__alert {
     border-radius: $border-radius-small;

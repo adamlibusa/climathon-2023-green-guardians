@@ -13,15 +13,6 @@ import axios from "axios";
       </aside>
       <Map class="map">map</Map>
       <section class="todo">todo</section>
-      <div class="btn-row">
-        <button class="btn btn--red btn--medium">Medium Red Primary</button>
-        <button class="btn btn--secondary btn--medium">Medium Red Secondary</button>
-        <button class="btn btn--green btn--medium">Medium Green Primary</button>
-      </div>
-      <div class="btn-row">
-        <button class="btn btn--red btn--big">Big Red Primary</button>
-        <button class="btn btn--secondary btn--big">Small Red Secondary</button>
-      </div>
     </div>
   </main>
 </template>
