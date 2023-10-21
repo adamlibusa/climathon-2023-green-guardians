@@ -5,16 +5,23 @@ import axios from "axios";
   <section :class="['shmu', `shmu--${shmuState}`]">
     <h3 class="shmu__title">Meteorologické Výstrahy</h3>
     <ul class="shmu__alerts">
-      <li class="shmu__alert" v-for="(alert, index) in alerts" :key="index">
+      <li class="shmu__alert" v-for="(alert, index) in alerts" :key="index" @click="showDialog">
         <p>Type: {{ alert.type }}</p>
         <p>Lvl: {{ alert.level }}</p>
       </li>
     </ul>
   </section>
+  <base-dialog @close="hideDialog" :open="dialogIsVisible">
+    <p>This is a test dialog!</p>
+    <button @click="hideDialog">Close it!</button>
+  </base-dialog>
 </template>
 <script>
+import BaseDialog from '@/components/BaseDialog.vue'
+
 export default {
   name: "Shmu",
+  components: {BaseDialog},
   async mounted() {
     let res = await axios.get("http://demo.climathon.sk:8080/weatheralerts");
     let data = res.data;
@@ -27,7 +34,16 @@ export default {
     return {
       shmuState: "normal",
       alerts: [],
+      dialogIsVisible: false,
     };
+  },
+  methods: {
+    hideDialog() {
+      this.dialogIsVisible = false
+    },
+    showDialog() {
+      this.dialogIsVisible = true
+    }
   },
 };
 </script>
