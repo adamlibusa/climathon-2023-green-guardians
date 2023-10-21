@@ -15,8 +15,8 @@ body {
 }
 
 .container {
-  max-width: 120rem;
-  margin: 0 auto;
-  padding: 0 2.4rem;
+  // max-width: 120rem;
+  // margin: 0 auto;
+  // padding: 0 2.4rem;
 }
 </style>
