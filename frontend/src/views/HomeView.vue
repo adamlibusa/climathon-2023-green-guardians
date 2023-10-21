@@ -1,14 +1,15 @@
 <script setup>
 import Map from "@/components/Map.vue";
+import Shmu from "@/components/Shmu.vue";
+import Header from "@/components/Header.vue";
+import axios from "axios";
 </script>
 <template>
   <main>
     <div class="container">
-      <header class="header">
-        <h1>Header Title</h1>
-      </header>
+      <Header></Header>
       <aside class="left-aside">
-        <section class="shmu">vsmu</section>
+        <Shmu></Shmu>
       </aside>
       <Map class="map">map</Map>
       <section class="todo">todo</section>
@@ -38,6 +39,9 @@ export default {
 }
 .left-aside {
   grid-area: left-aside;
+  padding: 0 1.2rem;
+
+  width: 100%;
 }
 .map {
   grid-area: map;

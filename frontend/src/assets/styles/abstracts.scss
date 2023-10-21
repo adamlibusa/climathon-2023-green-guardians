@@ -8,16 +8,18 @@ $blue: #001d3b;
 
 $orange: #ff4c29;
 
-$black: #09090b;
+$black: #18181b;
 
-$grey: #d4d4d8;
+$grey: #27272a;
+
+$light-grey: #39393f;
 
 $white: white;
 
 //? ---------colors in components--------
 // body
-$body-background-color: $white;
-$body-color: #262626;
+$body-background-color: $black;
+$body-color: white;
 
 // colors on areas with background
 $light-text-on-background: rgba(255, 255, 255, 0.733);

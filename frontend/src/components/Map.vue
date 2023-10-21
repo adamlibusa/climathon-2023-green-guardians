@@ -1,5 +1,7 @@
 <template>
-  <div ref="mapContainer" class="map-container"></div>
+  <div class="map-container-fix">
+    <div ref="mapContainer" class="map-container"></div>
+  </div>
 </template>
 <script>
 import mapboxgl from "mapbox-gl";
@@ -32,6 +34,9 @@ export default {
     });
 
     this.map = map;
+
+    // has to stay here, fixes the squishing
+    map.resize();
   },
 
   // Kill map on unmount
@@ -42,8 +47,17 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "@/assets/styles/abstracts.scss";
+
 .map-container {
   flex: 1;
   height: 90vh;
+  // width: 25rem;
+}
+
+.map-container-fix {
+  height: 100%;
+  overflow: hidden;
+  border-radius: $border-radius-medium;
 }
 </style>
