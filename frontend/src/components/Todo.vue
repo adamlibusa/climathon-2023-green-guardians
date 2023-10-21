@@ -1,7 +1,11 @@
 <template>
-  <div></div>
+  <section></section>
 </template>
 <script>
-export default {};
+export default {
+  name: "Todo",
+};
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import "@/assets/styles/abstracts.scss";
+</style>
