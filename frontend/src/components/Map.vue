@@ -56,7 +56,7 @@ export default {
 }
 
 .map-container-fix {
-  height: 100%;
+  height: 80vh;
   overflow: hidden;
   border-radius: $border-radius-medium;
 }

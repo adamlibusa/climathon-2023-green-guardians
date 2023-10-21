@@ -10,11 +10,20 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "@/assets/styles/abstracts.scss";
+
 .header {
   padding: 2.4rem;
   &__title {
+    font-size: 4rem;
+    line-height: 1.1;
+    // font-family: "SfPro-M";
+    letter-spacing: 1px;
   }
   &__subtitle {
+    font-size: 1.8rem;
+    font-family: "SfPro-B";
+    color: $text-grey;
   }
 }
 </style>
