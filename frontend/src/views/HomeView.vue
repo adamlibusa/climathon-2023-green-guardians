@@ -2,6 +2,7 @@
 import Map from "@/components/Map.vue";
 import Shmu from "@/components/Shmu.vue";
 import Header from "@/components/Header.vue";
+import Todo from "@/components/Todo.vue";
 import axios from "axios";
 </script>
 <template>
@@ -12,7 +13,9 @@ import axios from "axios";
         <Shmu></Shmu>
       </aside>
       <Map class="map">map</Map>
-      <section class="todo">todo</section>
+      <aside class="right-aside">
+        <Todo></Todo>
+      </aside>
     </div>
   </main>
 </template>

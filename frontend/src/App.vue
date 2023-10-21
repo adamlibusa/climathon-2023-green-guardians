@@ -14,9 +14,7 @@ body {
   color: $body-color;
 }
 
-.container {
-  // max-width: 120rem;
-  // margin: 0 auto;
-  // padding: 0 2.4rem;
+h3 {
+  margin-bottom: 1.8rem;
 }
 </style>

@@ -18,6 +18,13 @@ $text-grey: #71717a;
 
 $white: white;
 
+//? ------- urgency classes -------------
+$urgency-classes: (
+  "normal": " #27272a",
+  "yellow": "#fbbf24",
+  "red": "#b91c1c",
+);
+
 //? ---------colors in components--------
 // body
 $body-background-color: $black;
@@ -75,6 +82,14 @@ $animation--time-medium: 0.3s;
   flex-direction: $direction;
   align-items: center;
   justify-content: center;
+}
+
+@mixin urgency-classes {
+  @each $class, $color in $urgency-classes {
+    &--#{$class} {
+      border-left: 4px solid #{$color};
+    }
+  }
 }
 
 // STYLE STRUCTURE

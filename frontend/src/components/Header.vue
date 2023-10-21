@@ -14,10 +14,10 @@ export default {
 
 .header {
   padding: 2.4rem;
+  margin-bottom: 2.4rem;
   &__title {
     font-size: 4rem;
     line-height: 1.1;
-    // font-family: "SfPro-M";
     letter-spacing: 1px;
   }
   &__subtitle {

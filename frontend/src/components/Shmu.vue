@@ -3,7 +3,7 @@ import axios from "axios";
 </script>
 <template>
   <section :class="['shmu', `shmu--${shmuState}`]">
-    <h3 class="shmu__title">Meteorologické Výstrahy</h3>
+    <h3 class="shmu__title">Meteorologické výstrahy</h3>
     <ul class="shmu__alerts">
       <li
         @click="openShmuAlertDetailist(index)"
@@ -22,18 +22,17 @@ import axios from "axios";
   </base-dialog>
 </template>
 <script>
-import BaseDialog from '@/components/BaseDialog.vue'
+import BaseDialog from "@/components/BaseDialog.vue";
 
 export default {
   name: "Shmu",
-  components: {BaseDialog},
+  components: { BaseDialog },
   async mounted() {
     let res = await axios.get("http://demo.climathon.sk:8080/weatheralerts");
     let data = res.data;
 
     this.alerts = data.alerts;
     this.shmuState = data.highestLevel;
-    console.log(data.alerts.highestLevel);
   },
   data() {
     return {
@@ -44,10 +43,10 @@ export default {
   },
   methods: {
     closeShmuAlertDetailist() {
-      this.dialogIsVisible = false
+      this.dialogIsVisible = false;
     },
     openShmuAlertDetailist(_index) {
-      this.dialogIsVisible = true
+      this.dialogIsVisible = true;
     },
   },
 };
@@ -55,28 +54,13 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/styles/abstracts.scss";
 .shmu {
-  padding: 1.8rem;
+  padding: 1rem 1.8rem 1.8rem 1.8rem;
   border-radius: $border-radius-medium;
-  // max-height: ;
   background-color: $grey;
 
-  &--normal {
-    background-color: $grey;
-  }
-
-  &--yellow {
-    background-color: yellow;
-  }
-
-  &--red {
-    border-left: 4px solid #b91c1c;
-  }
+  @include urgency-classes;
 
   // SUBCOMPONENTS
-
-  &__title {
-    margin-bottom: 1.8rem;
-  }
 
   &__alerts {
     display: flex;
@@ -91,17 +75,7 @@ export default {
     background-color: $light-grey;
     padding: 0.6rem 1.2rem;
 
-    &--normal {
-      background-color: $grey;
-    }
-
-    &--yellow {
-      border-left: 4px solid #fbbf24;
-    }
-
-    &--red {
-      border-left: 4px solid #b91c1c;
-    }
+    @include urgency-classes;
 
     &__type {
       font-family: "SfPro-M", sans-serif;
