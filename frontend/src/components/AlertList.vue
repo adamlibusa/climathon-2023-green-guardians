@@ -33,10 +33,7 @@ import axios from "axios";
       }}</span>
     </header>
     <p class="detail-dialog__description">
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita minima
-      repellendus unde, accusamus laudantium nisi mollitia quam quod pariatur
-      nemo voluptatum ipsa sequi harum eaque inventore magnam dignissimos!
-      Totam, itaque?
+      {{ states.currentDialog.text }}
     </p>
 
     <div class="detail-dialog__involved-parties">

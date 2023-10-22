@@ -50,9 +50,10 @@ import axios from "axios";
               </svg>
             </button>
           </div>
+
           <div v-if="todo.infoOpen" class="todo__list__item__info">
-            <p>Dôvod:</p>
-            <p>{{ todo.alertName }}</p>
+            <span>Dôvod: </span>
+            <span>{{ todo.alertName }}</span>
           </div>
         </li>
       </ul>
@@ -68,7 +69,6 @@ export default {
     let data = res.data;
     console.log(data);
     this.todoList = data.items;
-
     // save this to cookies
   },
   data() {
@@ -98,7 +98,8 @@ export default {
 
 .todo {
   padding: 0 1.2rem;
-  min-width: 35rem;
+  min-width: 38rem;
+  max-width: 38rem;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -131,11 +132,14 @@ export default {
         justify-content: space-between;
         gap: 1.2rem;
         font-family: "SfPro-M", sans-serif;
+        // padding-bottom: 0.4rem;
       }
       &__info {
         width: 100%;
         text-align: left;
         padding-left: 3.6rem;
+        border-top: 1px solid $text-grey;
+        padding-top: 0.4rem;
       }
     }
 

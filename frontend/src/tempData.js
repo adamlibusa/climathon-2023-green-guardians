@@ -33,10 +33,11 @@ export const tempData = {
     responsive: true,
     lineTension: 0,
     scales: {
-      milimeters: [
+      yAxes: [
         {
-          title: {
-            display: true,
+          ticks: {
+            beginAtZero: true,
+            padding: 25,
           },
         },
       ],

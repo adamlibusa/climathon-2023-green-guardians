@@ -1,12 +1,20 @@
 <script setup>
 import TempChart from "@/components/TempChart.vue";
 import { states } from "@/stateManager.js";
+import Precipitation from "./Precipitation.vue";
 </script>
 <template>
   <section>
     <p class="toptitle">Detail lokácie:</p>
     <h3>{{ states.currentDetailist }}</h3>
-    <TempChart></TempChart>
+    <div class="charts">
+      <div class="cont">
+        <TempChart></TempChart>
+      </div>
+      <div class="cont">
+        <Precipitation></Precipitation>
+      </div>
+    </div>
   </section>
 </template>
 <script>
@@ -38,6 +46,12 @@ section {
   }
   h3 {
     font-size: 3.6rem;
+  }
+
+  .charts {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
   }
 }
 </style>

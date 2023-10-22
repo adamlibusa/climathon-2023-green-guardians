@@ -1,6 +1,5 @@
 <script setup>
 import Map from "@/components/Map.vue";
-import Shmu from "@/components/Shmu.vue";
 import Header from "@/components/Header.vue";
 import Todo from "@/components/Todo.vue";
 import AlertList from "@/components/AlertList.vue";
