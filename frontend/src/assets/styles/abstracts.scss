@@ -16,6 +16,8 @@ $light-grey: #39393f;
 
 $text-grey: #71717a;
 
+$text-light-grey: #a1a1aa;
+
 $white: white;
 
 //? ------- urgency classes -------------
@@ -88,6 +90,24 @@ $animation--time-medium: 0.3s;
   @each $class, $color in $urgency-classes {
     &--#{$class} {
       border-left: 4px solid #{$color};
+    }
+  }
+}
+
+// $party-colors: red, green, blue, violet, purple;
+@mixin party-coloring {
+  @for $i from 1 through 5 {
+    &--#{$i} {
+      background-color: nth(
+        (
+          rgb(255, 123, 0),
+          rgb(79, 128, 0),
+          rgb(51, 51, 180),
+          rgb(147, 45, 168),
+          rgb(82, 182, 196)
+        ),
+        $i
+      );
     }
   }
 }

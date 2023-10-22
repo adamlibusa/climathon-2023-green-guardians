@@ -1,12 +1,84 @@
+<script setup>
+import { states } from "@/stateManager.js";
+import axios from "axios";
+</script>
 <template>
   <div class="map-container-fix">
+    <button
+      v-if="states.currentDetailist"
+      @click="backButtonPushed"
+      class="back-to-overview"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 19.5L8.25 12l7.5-7.5"
+        />
+      </svg>
+    </button>
     <div ref="mapContainer" class="map-container"></div>
   </div>
 </template>
 <script>
 import mapboxgl from "mapbox-gl";
+import "../../node_modules/mapbox-gl/dist/mapbox-gl.css";
 mapboxgl.accessToken =
   "pk.eyJ1IjoiZmlsaXBzaXBvcyIsImEiOiJjbG8wZDM2ZjExN3Y4Mm5vNjFxYnA4Njd6In0.x14qxj7riqlzCaDX6Ru2ww";
+
+const geojson = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      properties: {
+        place: "LEAF",
+        iconSize: [10, 10],
+        urgency: "yellow",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [17.112093796795413, 48.14790937045524],
+      },
+    },
+  ],
+};
+
+let randomPlaces = [
+  "Strkovec",
+  "Lidl",
+  "Nivy",
+  "Mileticova",
+  "Sad Janka Krala",
+];
+
+console.log("lol");
+randomPlaces.forEach((place) => {
+  geojson.features.unshift({
+    type: "Feature",
+    properties: {
+      place: `${place}`,
+      iconSize: [10, 10],
+      urgency: Math.random() > 0.5 ? "normal" : "red",
+    },
+    geometry: {
+      type: "Point",
+      coordinates: [
+        17.112093796795413 +
+          0.05 * Math.random() * (Math.random() > 0.5 ? -1 : 1),
+        48.14790937045524 +
+          0.05 * Math.random() * (Math.random() > 0.5 ? -1 : 1),
+      ],
+    },
+  });
+});
 
 export default {
   // Initiate map on mount
@@ -33,10 +105,54 @@ export default {
       ],
     });
 
-    this.map = map;
+    for (let marker of geojson.features) {
+      // Create a DOM element for each marker.
+      const el = document.createElement("div");
+      const width = marker.properties.iconSize[0];
+      const height = marker.properties.iconSize[1];
+      el.className = "marker";
 
+      // this will depend on other stuff
+      switch (marker.properties.urgency) {
+        case "normal":
+          el.style.backgroundColor = `grey`;
+
+          break;
+        case "yellow":
+          el.style.backgroundColor = `yellow`;
+
+          break;
+        case "red":
+          el.style.backgroundColor = `red`;
+          break;
+        default:
+          break;
+      }
+
+      // this is good
+      el.style.width = `${width}px`;
+      el.style.height = `${height}px`;
+      el.style.backgroundSize = "100%";
+      el.style.borderRadius = "10rem";
+
+      el.addEventListener("click", () => {
+        map.zoom > 14 ? map.setZoom(map.zoom) : "";
+        map.flyTo({ center: marker.geometry.coordinates, zoom: 16 });
+        // map.setZoom(15);
+
+        // map.resize();
+
+        this.$emit("nodeClicked", marker.properties.place);
+      });
+
+      // Add markers to the map.
+      new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map);
+    }
+
+    map.dragRotate.disable();
+    this.map = map;
     // has to stay here, fixes the squishing
-    map.resize();
+    // map.resize();
   },
 
   // Kill map on unmount
@@ -44,6 +160,18 @@ export default {
     this.map.remove();
     this.map = null;
   },
+  methods: {
+    async backButtonPushed() {
+      // zoom out and center
+      await this.map.flyTo({
+        center: [17.112093796795413, 48.14790937045524],
+        zoom: 12,
+      });
+
+      states.currentDetailist = undefined;
+    },
+  },
+  emits: ["nodeClicked"],
 };
 </script>
 <style lang="scss" scoped>
@@ -52,12 +180,30 @@ export default {
 .map-container {
   flex: 1;
   height: 90vh;
+  width: 90rem;
   // width: 25rem;
 }
 
 .map-container-fix {
+  margin-left: 1.2rem;
   height: 80vh;
   overflow: hidden;
   border-radius: $border-radius-medium;
+  position: relative;
+  // width: 100%;
+}
+
+.back-to-overview {
+  position: absolute;
+  height: 4rem;
+  width: 4rem;
+  top: 1.4rem;
+  left: 1.4rem;
+  z-index: 50;
+  border-radius: $border-radius-medium;
+  color: $white;
+  padding: 0.6rem;
+  border: none;
+  background-color: $black;
 }
 </style>

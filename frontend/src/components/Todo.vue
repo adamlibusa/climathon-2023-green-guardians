@@ -7,28 +7,53 @@ import axios from "axios";
       <h3 class="todo__title">Úlohy</h3>
       <ul class="todo__list">
         <li
-          :class="['todo__list__item']"
+          :class="['todo__list__item', `todo__list__item--${todo.alertColor}`]"
           v-for="(todo, index) in todoList"
           :key="index"
         >
-          <button class="todo__list__checkbox" @click="checkboxClicked(index)">
-            <svg
-              v-if="todo.done"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class="w-6 h-6 todo__svg"
+          <div class="todo__list__item__normal">
+            <button
+              class="todo__list__checkbox"
+              @click="checkboxClicked(index)"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M4.5 12.75l6 6 9-13.5"
-              />
-            </svg>
-          </button>
-          {{ todo.subject }}
+              <svg
+                v-if="todo.done"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                class="w-6 h-6 todo__svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.5 12.75l6 6 9-13.5"
+                />
+              </svg>
+            </button>
+            {{ todo.subject }}
+            <button class="todo__list__info" @click="infoRequested(index)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div v-if="todo.infoOpen" class="todo__list__item__info">
+            <p>Dôvod:</p>
+            <p>{{ todo.alertName }}</p>
+          </div>
         </li>
       </ul>
     </div>
@@ -38,11 +63,13 @@ import axios from "axios";
 export default {
   name: "Todo",
   async mounted() {
+    // pretriedit
     let res = await axios.get("http://demo.climathon.sk:8080/checklists");
     let data = res.data;
-
+    console.log(data);
     this.todoList = data.items;
-    console.log(data.items);
+
+    // save this to cookies
   },
   data() {
     return {
@@ -52,8 +79,16 @@ export default {
   methods: {
     checkboxClicked(index) {
       // put the tick there
-      this.todoList[index].done = true;
+      if (!this.todoList[index].done) {
+        this.todoList[index].done = true;
+      } else {
+        this.todoList[index].done = !this.todoList[index].done;
+      }
       // update it in the data
+    },
+
+    infoRequested(index) {
+      this.todoList[index].infoOpen = !this.todoList[index].infoOpen;
     },
   },
 };
@@ -81,12 +116,27 @@ export default {
     &__item {
       border-radius: $border-radius-small;
       background-color: $light-grey;
-      padding: 0.6rem 1.2rem 0.6rem 0.6rem;
+      padding: 0.6rem 1.2rem 0.6rem 1rem;
       display: flex;
       align-items: center;
       gap: 1.2rem;
-
+      display: flex;
+      flex-direction: column;
       @include urgency-classes;
+
+      &__normal {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+        gap: 1.2rem;
+        font-family: "SfPro-M", sans-serif;
+      }
+      &__info {
+        width: 100%;
+        text-align: left;
+        padding-left: 3.6rem;
+      }
     }
 
     &__checkbox {
@@ -103,6 +153,16 @@ export default {
       &:hover {
         background-color: $text-grey;
       }
+    }
+
+    &__info {
+      color: #fff;
+      height: 2.4rem;
+      width: 2.4rem;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      margin-left: auto;
     }
   }
 }

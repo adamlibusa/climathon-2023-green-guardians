@@ -13,7 +13,7 @@ export default {
 @import "@/assets/styles/abstracts.scss";
 
 .header {
-  padding: 2.4rem;
+  padding: 2.4rem 3.6rem;
   margin-bottom: 2.4rem;
   &__title {
     font-size: 4rem;
