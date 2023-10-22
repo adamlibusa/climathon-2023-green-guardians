@@ -54,6 +54,7 @@ import axios from "axios";
               </svg>
             </button>
           </div>
+          <span class="todo__until">{{ todo.until }}</span>
           <div v-if="todo.actionItems" class="todo__list__item__actions">
             <ul class="todo__list__inner__ul">
               <li
@@ -81,7 +82,8 @@ import axios from "axios";
                     />
                   </svg>
                 </button>
-                {{ actionItem }}
+                {{ actionItem
+                }}<span>(<a class="camlink" href="#">live camera</a>)</span>
               </li>
             </ul>
           </div>
@@ -236,5 +238,15 @@ export default {
 
 .crossEm {
   text-decoration: line-through;
+}
+.camlink {
+  text-decoration: underline;
+  color: rgb(0, 153, 255);
+}
+.todo__until {
+  font-size: 1.4rem;
+  color: #a1a1aa;
+  transform: translateY(-6px);
+  line-height: 0.2;
 }
 </style>

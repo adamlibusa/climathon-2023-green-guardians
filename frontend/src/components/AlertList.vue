@@ -2,12 +2,17 @@
 import { states } from "@/stateManager.js";
 import BaseDialog from "./BaseDialog.vue";
 import axios from "axios";
-import ShmuWarningsForDetail from '@/components/ShmuWarningsForDetail.vue'
-import TodoForDetail from '@/components/TodoForDetail.vue'
+import ShmuWarningsForDetail from "@/components/ShmuWarningsForDetail.vue";
+import TodoForDetail from "@/components/TodoForDetail.vue";
 </script>
 <template>
   <section :class="['widget', `widget--${alertObject.highestLevel}`]">
     <h3 class="widget__title">{{ widgetTitle }}</h3>
+    <span class="source">
+      <a :href="`${alertObject.sourceUrl}`">
+        {{ alertObject.highestLevel === "red" ? "SHMU" : "BVS" }}</a
+      ></span
+    >
     <ul class="widget__alerts">
       <li
         v-for="(alert, index) in alertObject.items"
@@ -67,8 +72,8 @@ import TodoForDetail from '@/components/TodoForDetail.vue'
     </div>
 
     <ShmuWarningsForDetail
-        :alerts="alertObject.items"
-        :shmu-state="alertObject.highestLevel"
+      :alerts="alertObject.items"
+      :shmu-state="alertObject.highestLevel"
     />
 
     <div class="detail-dialog__tasks">
@@ -105,6 +110,7 @@ export default {
 <style lang="scss" scpoed>
 @import "@/assets/styles/abstracts.scss";
 .widget {
+  position: relative;
   padding: 1rem 1.8rem 1.8rem 1.8rem;
   @include urgency-classes;
   border-radius: $border-radius-medium;
@@ -192,5 +198,14 @@ export default {
   &__description {
     margin-bottom: 2.4rem;
   }
+}
+.source {
+  position: absolute;
+  right: -1rem;
+  top: -1rem;
+  background-color: #39393f;
+  padding: 0.2rem 1rem;
+  border-radius: 10rem;
+  font-size: 1.4rem;
 }
 </style>
