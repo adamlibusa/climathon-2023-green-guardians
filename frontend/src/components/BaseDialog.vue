@@ -50,6 +50,8 @@ dialog {
   z-index: 100;
   border: none;
   /* animation: modal 0.3s ease-out forwards; */
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 .modal-enter-active {
