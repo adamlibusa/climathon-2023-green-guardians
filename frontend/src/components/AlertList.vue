@@ -18,10 +18,19 @@ import ShmuWarningsForDetail from '@/components/ShmuWarningsForDetail.vue'
           `widget__alerts__alert--${alert.color}`,
         ]"
       >
-        <p class="alert__title">
-          {{ alert.type }}
+        <div class="alert__header">
+          <p class="alert__title">
+            {{ alert.type }}
+          </p>
+          <p class="alert__level">Lvl: {{ alert.level }}</p>
+        </div>
+        <p v-if="alert.duration" class="alert__from-to">{{ alert.duration }}</p>
+        <p v-if="alert.location" class="alert__location">
+          {{ alert.location }}
         </p>
-        <p class="alert__level">Lvl: {{ alert.level }}</p>
+        <p v-if="alert.dateOfPublication" class="alert__date">
+          publikované {{ alert.dateOfPublication }}
+        </p>
       </li>
     </ul>
   </section>
@@ -30,7 +39,10 @@ import ShmuWarningsForDetail from '@/components/ShmuWarningsForDetail.vue'
       <h1 class="detail-dialog__title">{{ states.currentDialog.subject }}</h1>
 
       <span class="detail-dialog__date">{{
-        `From ${states.currentDialog.from} to ${states.currentDialog.to}`
+        `From ${states.currentDialog.from.slice(
+          0,
+          -3
+        )} to ${states.currentDialog.to.slice(0, -3)}`
       }}</span>
     </header>
     <p class="detail-dialog__description">
@@ -120,7 +132,22 @@ export default {
       padding: 0.6rem 1.2rem;
       @include urgency-classes;
       cursor: pointer;
+      .alert__header {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        // background-color: ;
+      }
+      .alert__date,
+      .alert__location,
+      .alert__from-to {
+        font-size: 1.2rem;
+      }
 
+      .alert__from-to,
+      .alert__date {
+        color: #a1a1aa;
+      }
       .alert__title {
         font-family: "SfPro-M", sans-serif;
         letter-spacing: 1px;

@@ -20,6 +20,13 @@ import { states } from "@/stateManager.js";
           widgetTitle="Bratislavské vodárne"
           :alertObject="watersObject"
         ></AlertList>
+        <div class="image_wrapper">
+          <img
+            class="random_image"
+            src="https://cdn.discordapp.com/attachments/915236393108787230/1165599249367580762/image.png?ex=65476fe4&is=6534fae4&hm=94202078d79872011ae3be40483f81a12a1f2c76b655910214508a9b8838ef8c&"
+            alt=""
+          />
+        </div>
       </aside>
       <Map @nodeClicked="openDetailist" class="map">map</Map>
       <LocationDetailist v-if="states.currentDetailist"></LocationDetailist>
@@ -66,6 +73,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "@/assets/styles/abstracts.scss";
+
 .container {
   display: grid;
   grid-template-columns: v-bind(grid);
@@ -90,5 +99,10 @@ aside {
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
+  padding-bottom: 1.4rem;
+}
+
+.random_image {
+  border-radius: $border-radius-medium !important;
 }
 </style>

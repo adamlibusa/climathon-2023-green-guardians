@@ -54,7 +54,37 @@ import axios from "axios";
               </svg>
             </button>
           </div>
-
+          <div v-if="todo.actionItems" class="todo__list__item__actions">
+            <ul class="todo__list__inner__ul">
+              <li
+                class="todo__list__inner__check"
+                v-for="(actionItem, index) in todo.actionItems"
+                :key="index"
+              >
+                <button
+                  class="todo__list__checkbox"
+                  @click="checkboxClicked(index)"
+                >
+                  <svg
+                    v-if="todo.done"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-6 h-6 todo__svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4.5 12.75l6 6 9-13.5"
+                    />
+                  </svg>
+                </button>
+                {{ actionItem }}
+              </li>
+            </ul>
+          </div>
           <div v-if="todo.infoOpen" class="todo__list__item__info">
             <span>Dôvod: </span>
             <span>{{ todo.alertName }}</span>
@@ -87,6 +117,7 @@ export default {
   methods: {
     checkboxClicked(index) {
       // put the tick there
+
       if (!this.todoList[index].done) {
         this.todoList[index].done = true;
       } else {
@@ -106,8 +137,8 @@ export default {
 
 .todo {
   padding: 0 1.2rem;
-  min-width: 38rem;
-  max-width: 38rem;
+  min-width: 40rem;
+  max-width: 40rem;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -122,6 +153,21 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
+
+    &__inner__check {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    &__inner__ul {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      text-align: left;
+      width: 100%;
+      align-items: start;
+    }
     &__item {
       border-radius: $border-radius-small;
       background-color: $light-grey;
@@ -132,9 +178,16 @@ export default {
       display: flex;
       flex-direction: column;
       @include urgency-classes;
+      &__actions {
+        padding-left: 3.6rem;
+        width: 100%;
+      }
 
       &__normal {
         display: grid;
+        text-overflow: ellipsis;
+        white-space: nowrap; /* keeps the text in a single line */
+        overflow: hidden;
         grid-template-columns: auto 1fr auto;
         text-align: left;
         align-items: center;
