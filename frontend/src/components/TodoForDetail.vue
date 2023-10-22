@@ -54,9 +54,38 @@ import SituationEvaluation from '@/components/SituationEvaluation.vue'
               </svg>
             </button>
           </div>
-
-          <div style="padding-inline-start: 200px;">
-            <SituationEvaluation v-if="todo.done" />
+          <span class="todo__until" style="align-self: flex-start; padding-left: 3.6rem; padding-top: 0.5rem">{{ todo.until }}</span>
+          <div v-if="todo.actionItems" class="todo__list__item__actions">
+            <ul class="todo__list__inner__ul">
+              <li
+                class="todo__list__inner__check"
+                v-for="(actionItem, index) in todo.actionItems"
+                :key="index"
+              >
+                <button
+                  class="todo__list__checkbox"
+                  @click="checkboxClicked(index)"
+                >
+                  <svg
+                    v-if="todo.done"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-6 h-6 todo__svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4.5 12.75l6 6 9-13.5"
+                    />
+                  </svg>
+                </button>
+                {{ actionItem
+                }}<span>(<a class="camlink" href="#">live camera</a>)</span>
+              </li>
+            </ul>
           </div>
 
           <div v-if="todo.infoOpen" class="todo__list__item__info">
@@ -126,6 +155,21 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
+
+    &__inner__check {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    &__inner__ul {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      text-align: left;
+      width: 100%;
+      align-items: start;
+    }
     &__item {
       border-radius: $border-radius-small;
       background-color: $light-grey;
@@ -136,9 +180,16 @@ export default {
       display: flex;
       flex-direction: column;
       @include urgency-classes;
+      &__actions {
+        padding-left: 3.6rem;
+        width: 100%;
+      }
 
       &__normal {
         display: grid;
+        text-overflow: ellipsis;
+        white-space: nowrap; /* keeps the text in a single line */
+        overflow: hidden;
         grid-template-columns: auto 1fr auto;
         text-align: left;
         align-items: center;
@@ -188,8 +239,33 @@ export default {
     text-align: left;
   }
 }
+.todo__list__premail {
+  margin-bottom: 0.8rem;
+}
+
 
 .crossEm {
   text-decoration: line-through;
+}
+.camlink {
+  text-decoration: underline;
+  color: rgb(0, 153, 255);
+}
+.todo__until {
+  font-size: 1.4rem;
+  color: #a1a1aa;
+  transform: translateY(-6px);
+  line-height: 0.2;
+}
+
+.email__popup {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: balck;
+  font-family: "SfPro-M", sans-serif;
+  background-color: red;
+  padding: 0.8rem 1.2rem;
+  border-radius: $border-radius-medium;
 }
 </style>
