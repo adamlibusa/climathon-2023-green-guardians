@@ -2,7 +2,6 @@
 import { states } from "@/stateManager.js";
 import BaseDialog from "./BaseDialog.vue";
 import axios from "axios";
-import ShmuWarningsForDetail from "@/components/ShmuWarningsForDetail.vue";
 import TodoForDetail from "@/components/TodoForDetail.vue";
 </script>
 <template>
@@ -70,11 +69,6 @@ import TodoForDetail from "@/components/TodoForDetail.vue";
         </li>
       </ul>
     </div>
-
-    <ShmuWarningsForDetail
-      :alerts="alertObject.items"
-      :shmu-state="alertObject.highestLevel"
-    />
 
     <div class="detail-dialog__tasks">
       <TodoForDetail />
