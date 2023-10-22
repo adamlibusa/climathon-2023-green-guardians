@@ -7,7 +7,11 @@ import axios from "axios";
       <h3 class="todo__title">Úlohy</h3>
       <ul class="todo__list">
         <li
-          :class="['todo__list__item', `todo__list__item--${todo.alertColor}`]"
+          :class="[
+            'todo__list__item',
+            `todo__list__item--${todo.alertColor}`,
+            todo.done ? 'crossEm' : '',
+          ]"
           v-for="(todo, index) in todoList"
           :key="index"
         >
@@ -65,7 +69,11 @@ export default {
   name: "Todo",
   async mounted() {
     // pretriedit
-    let res = await axios.get("http://demo.climathon.sk:8080/checklists");
+    let adress =
+      this.$route.path === "/dispatch"
+        ? "http://demo.climathon.sk:8080/checklists/dispatch"
+        : "http://demo.climathon.sk:8080/checklists";
+    let res = await axios.get(adress);
     let data = res.data;
     console.log(data);
     this.todoList = data.items;
@@ -126,7 +134,9 @@ export default {
       @include urgency-classes;
 
       &__normal {
-        display: flex;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        text-align: left;
         align-items: center;
         width: 100%;
         justify-content: space-between;
@@ -169,5 +179,9 @@ export default {
       margin-left: auto;
     }
   }
+}
+
+.crossEm {
+  text-decoration: line-through;
 }
 </style>

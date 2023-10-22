@@ -1,31 +1,36 @@
 <template>
   <header class="header">
-    <h1 class="header__title">Dohľadové Centrum <base-chip :class="profileTypeClass" :big="true">{{ profileType }}</base-chip></h1>
+    <h1 class="header__title">
+      Dohľadové Centrum
+      <base-chip :class="profileTypeClass" :big="true">{{
+        profileType
+      }}</base-chip>
+    </h1>
     <p class="header__subtitle">01/01/2023</p>
   </header>
 </template>
 <script>
-import BaseChip from '@/components/UI/BaseChip.vue'
+import BaseChip from "@/components/UI/BaseChip.vue";
 
 export default {
   name: "Header",
-  components: {BaseChip},
+  components: { BaseChip },
   computed: {
     profileType() {
-      if (this.$route.path === '/dispatcher') {
-        return 'Dispečer'
+      if (this.$route.path === "/dispatch") {
+        return "Dispečer";
       } else {
-        return 'Krízový manažér'
+        return "Krízový manažér";
       }
     },
     profileTypeClass() {
-      if (this.$route.path === '/dispatcher') {
-        return 'dispatcher'
+      if (this.$route.path === "/dispatch") {
+        return "dispatcher";
       } else {
-        return 'crisis-manager'
+        return "crisis-manager";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -54,7 +59,7 @@ h1 {
     margin-inline-start: 12px;
 
     &.dispatcher {
-      background-color: $basic-dark-grey;
+      background-color: rgb(40, 142, 160);
     }
 
     &.crisis-manager {
