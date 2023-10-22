@@ -1,5 +1,10 @@
 <script setup>
 import axios from "axios";
+import SituationEvaluation from '@/components/SituationEvaluation.vue'
+import {states} from '@/stateManager.js'
+import BaseDialog from '@/components/BaseDialog.vue'
+import ShmuWarningsForDetail from '@/components/ShmuWarningsForDetail.vue'
+import TodoForDetail from '@/components/TodoForDetail.vue'
 </script>
 <template>
   <section class="todo">
@@ -10,7 +15,6 @@ import axios from "axios";
           :class="[
             'todo__list__item',
             `todo__list__item--${todo.alertColor}`,
-            todo.done ? 'crossEm' : '',
           ]"
           v-for="(todo, index) in todoList"
           :key="index"
@@ -36,7 +40,7 @@ import axios from "axios";
                 />
               </svg>
             </button>
-            {{ todo.subject }}
+            <span :class="todo.done ? 'crossEm' : ''">{{ todo.subject }}</span>
             <button class="todo__list__info" @click="infoRequested(index)">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -87,10 +91,15 @@ import axios from "axios";
               </li>
             </ul>
           </div>
+
           <div v-if="todo.infoOpen" class="todo__list__item__info">
             <span>Dôvod: </span>
             <span>{{ todo.alertName }}</span>
           </div>
+
+          <BaseDialog :open="states.currentDialog2">
+            <SituationEvaluation />
+          </BaseDialog>
         </li>
       </ul>
     </div>
@@ -114,6 +123,7 @@ export default {
   data() {
     return {
       todoList: [],
+      dialogShown: false,
     };
   },
   methods: {
@@ -122,6 +132,7 @@ export default {
 
       if (!this.todoList[index].done) {
         this.todoList[index].done = true;
+        states.currentDialog2 = true
       } else {
         this.todoList[index].done = !this.todoList[index].done;
       }

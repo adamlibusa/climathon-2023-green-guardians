@@ -7,7 +7,7 @@ import { states } from "@/stateManager.js";
     <div
       v-if="open"
       class="backdrop"
-      @click="states.currentDialog = undefined"
+      @click="states.currentDialog = undefined; states.currentDialog2 = undefined;"
     ></div>
     <dialog open v-if="open">
       <slot></slot>

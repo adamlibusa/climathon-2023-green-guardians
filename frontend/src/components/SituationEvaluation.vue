@@ -101,8 +101,6 @@ export default {
 @import "@/assets/styles/abstracts.scss";
 
 .todo {
-  margin-inline-start: 200px;
-
   //padding: 0 1.2rem;
   min-width: 38rem;
   //max-width: 38rem;

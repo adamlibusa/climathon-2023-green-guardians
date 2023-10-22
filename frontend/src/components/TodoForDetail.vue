@@ -55,7 +55,9 @@ import SituationEvaluation from '@/components/SituationEvaluation.vue'
             </button>
           </div>
 
-          <SituationEvaluation v-if="todo.done" />
+          <div style="padding-inline-start: 200px;">
+            <SituationEvaluation v-if="todo.done" />
+          </div>
 
           <div v-if="todo.infoOpen" class="todo__list__item__info">
             <span>Dôvod: </span>
