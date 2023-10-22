@@ -1,16 +1,14 @@
 <script setup>
 import axios from "axios";
-import SituationEvaluation from '@/components/SituationEvaluation.vue'
 </script>
 <template>
   <section class="todo">
     <div class="container">
-      <h3 class="todo__title">Úlohy</h3>
+      <h3 class="todo__title">Vyhodnotenie situácie</h3>
       <ul class="todo__list">
         <li
           :class="[
             'todo__list__item',
-            `todo__list__item--${todo.alertColor}`,
           ]"
           v-for="(todo, index) in todoList"
           :key="index"
@@ -55,8 +53,6 @@ import SituationEvaluation from '@/components/SituationEvaluation.vue'
             </button>
           </div>
 
-          <SituationEvaluation v-if="todo.done" />
-
           <div v-if="todo.infoOpen" class="todo__list__item__info">
             <span>Dôvod: </span>
             <span>{{ todo.alertName }}</span>
@@ -69,21 +65,19 @@ import SituationEvaluation from '@/components/SituationEvaluation.vue'
 <script>
 export default {
   name: "Todo",
-  async mounted() {
-    // pretriedit
-    let adress =
-      this.$route.path === "/dispatch"
-        ? "http://demo.climathon.sk:8080/checklists/dispatch"
-        : "http://demo.climathon.sk:8080/checklists";
-    let res = await axios.get(adress);
-    let data = res.data;
-    console.log(data);
-    this.todoList = data.items;
-    // save this to cookies
-  },
   data() {
     return {
-      todoList: [],
+      todoList: [
+        {subject: 'Situácia je pod kontrolou', alertName: '', alertId: 1, alertColor: 'red', actionItems: []},
+        {
+          subject: 'Potrebné ďalšie monitorovanie - zatiaľ nejasné',
+          alertName: '',
+          alertId: 2,
+          alertColor: 'red',
+          actionItems: []
+        },
+        {subject: 'Situácia vyžaduje reakciu', alertName: '', alertId: 3, alertColor: 'red', actionItems: []},
+      ]
     };
   },
   methods: {
@@ -107,6 +101,8 @@ export default {
 @import "@/assets/styles/abstracts.scss";
 
 .todo {
+  margin-inline-start: 200px;
+
   //padding: 0 1.2rem;
   min-width: 38rem;
   //max-width: 38rem;
@@ -124,6 +120,8 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
+    padding: 0 1.2rem 1.2rem;
+
     &__item {
       border-radius: $border-radius-small;
       background-color: $light-grey;
@@ -183,7 +181,9 @@ export default {
   }
 
   &__title {
+    padding: 0.5rem 1.2rem 1rem;
     text-align: left;
+    margin-block-end: 0.5rem;
   }
 }
 
