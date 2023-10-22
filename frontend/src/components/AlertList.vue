@@ -2,6 +2,7 @@
 import { states } from "@/stateManager.js";
 import BaseDialog from "./BaseDialog.vue";
 import axios from "axios";
+import ShmuWarningsForDetail from '@/components/ShmuWarningsForDetail.vue'
 </script>
 <template>
   <section :class="['widget', `widget--${alertObject.highestLevel}`]">
@@ -51,6 +52,12 @@ import axios from "axios";
         </li>
       </ul>
     </div>
+
+    <ShmuWarningsForDetail
+        :alerts="alertObject.items"
+        :shmu-state="alertObject.highestLevel"
+    />
+
     <div class="detail-dialog__tasks">
       <h4 class="detail-dialog__subtitle">Relevantné úlohy:</h4>
       <ul class="detail-dialog__tasks__list">
