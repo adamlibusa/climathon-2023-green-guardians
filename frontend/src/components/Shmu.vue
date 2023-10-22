@@ -1,5 +1,6 @@
 <script setup>
 import axios from "axios";
+import BaseChip from '@/components/UI/BaseChip.vue'
 </script>
 <template>
   <section :class="['shmu', `shmu--${shmuState}`]">
@@ -33,6 +34,15 @@ import axios from "axios";
       <h4 class="detail-dialog__subtitle">Zapojené skupiny:</h4>
       <ul class="detail-dialog__parties-list">
         <li
+            v-for="(party, index) in dialogData.involvedParties"
+            :key="index"
+        >
+          <base-chip :class="`detail-dialog__party--${index + 1}`">
+            {{ party.name }}
+          </base-chip>
+        </li>
+
+        <li
           :class="[
             'detail-dialog__party',
             `detail-dialog__party--${index + 1}`,
@@ -62,9 +72,10 @@ import axios from "axios";
 <script>
 import BaseDialog from "@/components/BaseDialog.vue";
 
+
 export default {
   name: "Shmu",
-  components: { BaseDialog },
+  components: { BaseDialog, BaseChip },
   async mounted() {
     let res = await axios.get("http://demo.climathon.sk:8080/weatheralerts");
     let data = res.data;
@@ -153,18 +164,6 @@ export default {
     display: flex;
     gap: 1.2rem;
     flex-wrap: wrap;
-  }
-  &__party {
-    border-radius: $border-radius-large;
-    font-family: "SfPro-B", sans-serif;
-    letter-spacing: 0.5px;
-    padding: 0.2rem 0.8rem;
-    font-size: 1.4rem;
-    color: white;
-    // border: 2px solid rgba($text-grey, 0.7);
-    @include party-coloring;
-    // background-color: rgba($text-grey, 0.5);
-    // color: $black;
   }
 
   &__description {
