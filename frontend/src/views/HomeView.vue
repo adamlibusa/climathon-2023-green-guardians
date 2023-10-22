@@ -21,6 +21,7 @@ import { states } from "@/stateManager.js";
           :alertObject="watersObject"
         ></AlertList>
         <div class="image_wrapper">
+          <span class="source">SITA</span>
           <img
             class="random_image"
             src="https://cdn.discordapp.com/attachments/915236393108787230/1165599249367580762/image.png?ex=65476fe4&is=6534fae4&hm=94202078d79872011ae3be40483f81a12a1f2c76b655910214508a9b8838ef8c&"
@@ -102,6 +103,21 @@ aside {
   padding-bottom: 1.4rem;
 }
 
+.image_titler {
+  text-transform: uppercase;
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  background-color: #39393f;
+  color: white;
+  padding: 0.2rem 1rem;
+  border-radius: 10rem;
+  font-size: 1.4rem;
+}
+
+.image_wrapper {
+  position: relative;
+}
 .random_image {
   border-radius: $border-radius-medium !important;
 }

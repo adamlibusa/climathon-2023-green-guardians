@@ -39,46 +39,41 @@ const geojson = {
     {
       type: "Feature",
       properties: {
-        place: "LEAF",
+        place: "Zochova",
+        iconSize: [10, 10],
+        urgency: "red",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [17.107457987237833, 48.147842015271344],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        place: "Bajkalska",
+        iconSize: [10, 10],
+        urgency: "red",
+      },
+      geometry: {
+        type: "Point",
+        coordinates: [17.145171, 48.156216],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        place: "Technicka",
         iconSize: [10, 10],
         urgency: "yellow",
       },
       geometry: {
         type: "Point",
-        coordinates: [17.112093796795413, 48.14790937045524],
+        coordinates: [17.175404498150133, 48.17536042289632],
       },
     },
   ],
 };
-
-let randomPlaces = [
-  "Strkovec",
-  "Lidl",
-  "Nivy",
-  "Mileticova",
-  "Sad Janka Krala",
-];
-
-console.log("lol");
-randomPlaces.forEach((place) => {
-  geojson.features.unshift({
-    type: "Feature",
-    properties: {
-      place: `${place}`,
-      iconSize: [10, 10],
-      urgency: Math.random() > 0.5 ? "normal" : "red",
-    },
-    geometry: {
-      type: "Point",
-      coordinates: [
-        17.112093796795413 +
-          0.05 * Math.random() * (Math.random() > 0.5 ? -1 : 1),
-        48.14790937045524 +
-          0.05 * Math.random() * (Math.random() > 0.5 ? -1 : 1),
-      ],
-    },
-  });
-});
 
 export default {
   // Initiate map on mount
@@ -119,11 +114,11 @@ export default {
 
           break;
         case "yellow":
-          el.style.backgroundColor = `yellow`;
+          el.style.backgroundColor = `#fbbf24`;
 
           break;
         case "red":
-          el.style.backgroundColor = `red`;
+          el.style.backgroundColor = `#b91c1c`;
           break;
         default:
           break;

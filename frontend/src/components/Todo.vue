@@ -94,7 +94,10 @@ import TodoForDetail from '@/components/TodoForDetail.vue'
 
           <div v-if="todo.infoOpen" class="todo__list__item__info">
             <span>Dôvod: </span>
-            <span>{{ todo.alertName }}</span>
+            <p class="todo__list__premail">{{ todo.alertName }}</p>
+            <button class="email__popup" @click="emailPopUpOpen">
+              Pošlite im email
+            </button>
           </div>
 
           <BaseDialog :open="states.currentDialog2">
@@ -246,7 +249,9 @@ export default {
     }
   }
 }
-
+.todo__list__premail {
+  margin-bottom: 0.8rem;
+}
 .crossEm {
   text-decoration: line-through;
 }
@@ -259,5 +264,16 @@ export default {
   color: #a1a1aa;
   transform: translateY(-6px);
   line-height: 0.2;
+}
+
+.email__popup {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: balck;
+  font-family: "SfPro-M", sans-serif;
+  background-color: red;
+  padding: 0.8rem 1.2rem;
+  border-radius: $border-radius-medium;
 }
 </style>
