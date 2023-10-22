@@ -6,7 +6,7 @@
         profileType
       }}</base-chip>
     </h1>
-    <p class="header__subtitle">01/01/2023</p>
+    <p class="header__subtitle">{{ currentDate }}</p>
   </header>
 </template>
 <script>
@@ -30,6 +30,10 @@ export default {
         return "crisis-manager";
       }
     },
+    currentDate() {
+      const date = new Date()
+      return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
+    }
   },
 };
 </script>
