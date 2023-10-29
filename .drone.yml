@@ -18,7 +18,7 @@ steps:
   - name: deploy
     image: drillster/drone-rsync
     settings:
-      hosts: [ "192.168.255.209" ]
+      hosts: [ "192.168.255.170" ]
       port: 22
       user: drone
       key:
