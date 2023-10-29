@@ -38,6 +38,8 @@ import { states } from "@/stateManager.js";
   </main>
 </template>
 <script>
+import {apiServer} from "@/apiServer.js";
+
 export default {
   components: {
     Map,
@@ -45,12 +47,12 @@ export default {
   async mounted() {
     // make calls for alert lists
     // BVS
-    let res = await axios.get("http://demo.climathon.sk:8080/bvsitems");
+    let res = await axios.get(apiServer.baseUrl + "/bvsitems");
     let data = res.data;
     console.log(data);
     this.watersObject = data;
 
-    let meteo = await axios.get("http://demo.climathon.sk:8080/weatheralerts");
+    let meteo = await axios.get(apiServer.baseUrl + "/weatheralerts");
     let mdata = meteo.data;
     console.log(mdata);
     this.meteoObject = mdata;

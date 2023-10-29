@@ -71,13 +71,14 @@ import BaseChip from '@/components/UI/BaseChip.vue'
 </template>
 <script>
 import BaseDialog from "@/components/BaseDialog.vue";
+import {apiServer} from "@/apiServer.js";
 
 
 export default {
   name: "Shmu",
   components: { BaseDialog, BaseChip },
   async mounted() {
-    let res = await axios.get("http://demo.climathon.sk:8080/weatheralerts");
+    let res = await axios.get(apiServer.baseUrl + "/weatheralerts");
     let data = res.data;
 
     this.alerts = data.items;

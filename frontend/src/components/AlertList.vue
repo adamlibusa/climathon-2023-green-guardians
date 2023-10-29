@@ -76,6 +76,8 @@ import TodoForDetail from "@/components/TodoForDetail.vue";
   </BaseDialog>
 </template>
 <script>
+import {apiServer} from "@/apiServer.js";
+
 export default {
   name: "AlertList",
   props: {
@@ -93,7 +95,7 @@ export default {
   methods: {
     async openAlertDialog(index) {
       let res = await axios.post(
-        `http://demo.climathon.sk:8080/weatheralertdetail?AlertId=${index + 1}`
+        apiServer.baseUrl + `/weatheralertdetail?AlertId=${index + 1}`
       );
       let data = res.data;
       states.currentDialog = data;

@@ -109,14 +109,16 @@ import TodoForDetail from '@/components/TodoForDetail.vue'
   </section>
 </template>
 <script>
+import {apiServer} from "@/apiServer.js";
+
 export default {
   name: "Todo",
   async mounted() {
     // pretriedit
     let adress =
       this.$route.path === "/dispatch"
-        ? "http://demo.climathon.sk:8080/checklists/dispatch"
-        : "http://demo.climathon.sk:8080/checklists";
+        ? apiServer.baseUrl + "/checklists/dispatch"
+        : apiServer.baseUrl + "/checklists";
     let res = await axios.get(adress);
     let data = res.data;
     console.log(data);
@@ -270,7 +272,7 @@ export default {
   background-color: transparent;
   border: none;
   outline: none;
-  color: balck;
+  color: black;
   font-family: "SfPro-M", sans-serif;
   background-color: red;
   padding: 0.8rem 1.2rem;
