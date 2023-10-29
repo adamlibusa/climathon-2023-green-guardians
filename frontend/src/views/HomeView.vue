@@ -93,6 +93,9 @@ export default {
   max-width: 31rem;
   width: 100%;
 }
+.right-aside {
+  padding: 0 0 0 1.2rem;
+}
 .map {
 }
 .todo {

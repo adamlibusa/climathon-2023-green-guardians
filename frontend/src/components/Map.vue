@@ -30,6 +30,7 @@ import axios from "axios";
 <script>
 import mapboxgl from "mapbox-gl";
 import "../../node_modules/mapbox-gl/dist/mapbox-gl.css";
+import {states} from "@/stateManager.js";
 mapboxgl.accessToken =
   "pk.eyJ1IjoiZmlsaXBzaXBvcyIsImEiOiJjbG8wZDM2ZjExN3Y4Mm5vNjFxYnA4Njd6In0.x14qxj7riqlzCaDX6Ru2ww";
 
@@ -174,18 +175,17 @@ export default {
 
 .map-container {
   flex: 1;
-  height: 90vh;
-  width: 90rem;
-  // width: 25rem;
+  height: 100%;
+  width: 100%;
 }
 
 .map-container-fix {
   margin-left: 1.2rem;
-  height: 80vh;
+  height: 100%;
   overflow: hidden;
   border-radius: $border-radius-medium;
   position: relative;
-  // width: 100%;
+  width: 100%;
 }
 
 .back-to-overview {

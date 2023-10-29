@@ -14,6 +14,17 @@ $approve-button: #5DB56E;
 $on-air-icon: #ADCD00;
 $info-icons: #4F86D8;
 
+#app {
+  height: 100%;
+}
+
+main {
+  height: 100%;
+}
+
+main > .container {
+  height: 100%;
+}
 // Buttons
 
 .btn-row {
